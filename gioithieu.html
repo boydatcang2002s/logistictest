@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giới Thiệu - AV Logistics</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --primary-dark: #0f2744;
+    --accent: #e63946;
+    --accent-hover: #c92a37;
+    --gray: #6b7280;
+    --light: #f9fafb;
+    --white: #ffffff;
+    --border: #e5e7eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--white);
+    color: var(--primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .top-bar-info a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .top-bar-info a:hover {
+    color: var(--accent);
+  }
+
+  .top-bar-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .top-bar-social a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .top-bar-social a:hover {
+    color: var(--accent);
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-logo-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--white);
+  }
+
+  .nav-logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--primary);
+  }
+
+  .nav-logo-text span {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-links > .nav-item > a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .nav-links > .nav-item > a:hover {
+    color: var(--accent);
+  }
+
+  .nav-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+
+  .nav-item:hover .nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s;
+    z-index: 1000;
+  }
+
+  .nav-item:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .dropdown a:hover {
+    background: var(--light);
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-hover);
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .page-header p {
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin: 0.5rem auto 0;
+  }
+
+  .section-header p {
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* SERVICES GRID */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--white);
+  }
+
+  .service-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+  }
+
+  .service-card p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* RECRUITMENT */
+  .recruitment-section {
+    background: var(--light);
+  }
+
+  .job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .job-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+  }
+
+  .job-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .job-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .job-tag {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .job-details {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--gray);
+  }
+
+  .job-details span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .job-description {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .btn-apply {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.7rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .btn-apply:hover {
+    background: var(--primary-dark);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 3rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+  }
+
+  .footer-col h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+  }
+
+  .footer-col p,
+  .footer-col a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .top-bar {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .nav-links {
+      display: none;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+    .job-header {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-info">
+    <a href="tel:+84906174066">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      0906 174 066
+    </a>
+    <a href="mailto:sales@hplink.com.vn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      sales@hplink.com.vn
+    </a>
+  </div>
+  <div class="top-bar-social">
+    <a href="#">Facebook</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="nav-logo-text">AV <span>Logistics</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
+      <li class="nav-item"><a href="about.html">Về Chúng Tôi</a></li>
+      <li class="nav-item">
+        <a href="gioithieu.html">Giới Thiệu <span class="nav-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="gioithieu.html#services">Dịch Vụ</a>
+          <a href="gioithieu.html#tuyendung">Tuyển Dụng</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#">Góc Tư Vấn <span class="nav-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="#">Văn Bản Pháp Quy</a>
+          <a href="#">Kiểm Tra Chuyên Ngành</a>
+          <a href="#">Thủ Tục Hải Quan</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="tintuc.html">Tin Tức</a></li>
+      <li class="nav-item"><a href="lienhebaogia.html" class="nav-cta">Liên Hệ Báo Giá</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>Giới Thiệu</h1>
+  <p>Công Ty TNHH Thương Mại Và Giao Nhận AV - Đối tác logistics uy tín tại Hải Phòng</p>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <h2>Dịch Vụ Của Chúng Tôi</h2>
+    <p>Cung cấp giải pháp logistics trọn gói từ thông quan đến vận chuyển quốc tế</p>
+  </div>
+  
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <h3>Thủ Tục Hải Quan</h3>
+      <p>Khai báo và làm thủ tục hải quan xuất nhập khẩu nhanh chóng, chính xác. Đội ngũ chuyên viên am hiểu luật hải quan hiện hành.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      </div>
+      <h3>Vận Tải Đường Bộ</h3>
+      <p>Vận chuyển hàng hóa nội địa bằng xe container, xe tải các loại. Kết nối cảng biển Hải Phòng với các KCN toàn quốc.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2c-5.53 0-10 4.47-10 10s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59V15.5h-3.5V13h7c0 1.65-1.35 3-3.5 3zm-9.5 0c-2.15 0-3.5-1.35-3.5-3h7v2.5H7.5zm-3.5-5v-2h7v2H4zm16-2h-3.5V7H10v3.5H6.5v-5c0-.83.67-1.5 1.5-1.5h10.5c.83 0 1.5.67 1.5 1.5v5z"/></svg>
+      </div>
+      <h3>Vận Tải Đường Biển</h3>
+      <p>Booking tàu, gom hàng lẻ (LCL) và nguyên container (FCL) đi các tuyến quốc tế. Đối tác với các hãng tàu lớn.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      </div>
+      <h3>Đăng Ký KTCL</h3>
+      <p>Đăng ký kiểm tra chất lượng hàng hóa nhập khẩu theo quy định. Tư vấn và xử lý hồ sơ kiểm định, hun trùng, kiểm dịch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUITMENT -->
+<section id="tuyendung" class="recruitment-section">
+  <div class="section-header">
+    <h2>Tuyển Dụng</h2>
+    <p>Tham gia đội ngũ AV Logistics và phát triển sự nghiệp cùng chúng tôi</p>
+  </div>
+  
+  <div class="job-list">
+    <div class="job-card">
+      <div class="job-header">
+        <div class="job-title">Chuyên Viên Hải Quan</div>
+        <span class="job-tag">Full-time</span>
+      </div>
+      <div class="job-details">
+        <span>📍 Hải Phòng</span>
+        <span>💰 Lương thỏa thuận</span>
+        <span>🎓 Cao đẳng trở lên</span>
+      </div>
+      <div class="job-description">
+        <p>Công việc: Thực hiện khai báo hải quan, làm thủ tục thông quan xuất nhập khẩu. Làm việc với khách hàng và cơ quan hải quan.</p>
+        <p>Yêu cầu: Có kinh nghiệm về thủ tục hải quan, am hiểu luật hải quan hiện hành.</p>
+      </div>
+      <a href="lienhebaogia.html" class="btn-apply">Ứng Tuyển Ngay</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-header">
+        <div class="job-title">Nhân Viên Kinh Doanh Logistics</div>
+        <span class="job-tag">Full-time</span>
+      </div>
+      <div class="job-details">
+        <span>📍 Hải Phòng</span>
+        <span>💰 Lương + Hoa hồng</span>
+        <span>🎓 Đại học</span>
+      </div>
+      <div class="job-description">
+        <p>Công việc: Tìm kiếm và phát triển khách hàng mới, tư vấn giải pháp logistics, báo giá dịch vụ.</p>
+        <p>Yêu cầu: Giao tiếp tốt, có kỹ năng bán hàng, am hiểu về logistics là lợi thế.</p>
+      </div>
+      <a href="lienhebaogia.html" class="btn-apply">Ứng Tuyển Ngay</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-header">
+        <div class="job-title">Lái Xe Container</div>
+        <span class="job-tag">Full-time</span>
+      </div>
+      <div class="job-details">
+        <span>📍 Hải Phòng</span>
+        <span>💰 Lương theo chuyến</span>
+        <span>🎓 Bằng lái C, E, FC</span>
+      </div>
+      <div class="job-description">
+        <p>Công việc: Lái xe container, xe tải vận chuyển hàng hóa nội địa và từ cảng đến kho khách hàng.</p>
+        <p>Yêu cầu: Có bằng lái phù hợp, kinh nghiệm lái xe container, sức khỏe tốt.</p>
+      </div>
+      <a href="lienhebaogia.html" class="btn-apply">Ứng Tuyển Ngay</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Công Ty AV Logistics</h4>
+      <p>Công Ty TNHH Thương Mại Và Giao Nhận AV</p>
+      <p>MST: 0202116800</p>
+      <p>Địa chỉ: 1/115 Phương Lưu, Phường Ngô Quyền, TP. Hải Phòng</p>
+    </div>
+    <div class="footer-col">
+      <h4>Dịch Vụ</h4>
+      <a href="#services">Thủ Tục Hải Quan</a>
+      <a href="#services">Vận Tải Đường Bộ</a>
+      <a href="#services">Vận Tải Đường Biển</a>
+      <a href="#services">Đăng Ký KTCL</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Kết</h4>
+      <a href="index.html">Trang Chủ</a>
+      <a href="tintuc.html">Tin Tức</a>
+      <a href="lienhebaogia.html">Liên Hệ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Hệ</h4>
+      <p>Hotline: 0906 174 066</p>
+      <p>Email: sales@hplink.com.vn</p>
+      <p>Hải Phòng, Việt Nam</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Công Ty TNHH Thương Mại Và Giao Nhận AV · MST 0202116800
+  </div>
+</footer>
+
+</body>
+</html>

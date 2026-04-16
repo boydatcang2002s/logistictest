@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tin Tức - AV Logistics</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --primary-dark: #0f2744;
+    --accent: #e63946;
+    --accent-hover: #c92a37;
+    --gray: #6b7280;
+    --light: #f9fafb;
+    --white: #ffffff;
+    --border: #e5e7eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--white);
+    color: var(--primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .top-bar-info a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .top-bar-info a:hover {
+    color: var(--accent);
+  }
+
+  .top-bar-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .top-bar-social a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .top-bar-social a:hover {
+    color: var(--accent);
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-logo-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--white);
+  }
+
+  .nav-logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--primary);
+  }
+
+  .nav-logo-text span {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-links > .nav-item > a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .nav-links > .nav-item > a:hover {
+    color: var(--accent);
+  }
+
+  .nav-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+
+  .nav-item:hover .nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s;
+    z-index: 1000;
+  }
+
+  .nav-item:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .dropdown a:hover {
+    background: var(--light);
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-hover);
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .page-header p {
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* NEWS SECTION */
+  .news-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .news-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+  }
+
+  .news-image {
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 3rem;
+  }
+
+  .news-content {
+    padding: 1.5rem;
+  }
+
+  .news-date {
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .news-excerpt {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .news-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .news-link:hover {
+    color: var(--accent-hover);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 3rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+  }
+
+  .footer-col h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+  }
+
+  .footer-col p,
+  .footer-col a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .top-bar {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .nav-links {
+      display: none;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-info">
+    <a href="tel:+84906174066">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      0906 174 066
+    </a>
+    <a href="mailto:sales@hplink.com.vn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      sales@hplink.com.vn
+    </a>
+  </div>
+  <div class="top-bar-social">
+    <a href="#">Facebook</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="nav-logo-text">AV <span>Logistics</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
+      <li class="nav-item"><a href="about.html">Về Chúng Tôi</a></li>
+      <li class="nav-item">
+        <a href="gioithieu.html">Giới Thiệu <span class="nav-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="gioithieu.html#services">Dịch Vụ</a>
+          <a href="gioithieu.html#tuyendung">Tuyển Dụng</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#">Góc Tư Vấn <span class="nav-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="#">Văn Bản Pháp Quy</a>
+          <a href="#">Kiểm Tra Chuyên Ngành</a>
+          <a href="#">Thủ Tục Hải Quan</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="tintuc.html">Tin Tức</a></li>
+      <li class="nav-item"><a href="lienhebaogia.html" class="nav-cta">Liên Hệ Báo Giá</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>Tin Tức</h1>
+  <p>Cập nhật thông tin mới nhất về logistics và thủ tục hải quan</p>
+</div>
+
+<!-- NEWS SECTION -->
+<section class="news-section">
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-image">📰</div>
+      <div class="news-content">
+        <div class="news-date">15/04/2025</div>
+        <h3 class="news-title">Cập nhật quy định hải quan mới nhất năm 2025</h3>
+        <p class="news-excerpt">Nội dung mới về thủ tục thông quan và các quy định thay đổi trong lĩnh vực xuất nhập khẩu.</p>
+        <a href="#" class="news-link">Đọc thêm →</a>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-image">🚢</div>
+      <div class="news-content">
+        <div class="news-date">10/04/2025</div>
+        <h3 class="news-title">Xu hướng vận tải biển quốc tế năm 2025</h3>
+        <p class="news-excerpt">Phân tích thị trường vận tải biển và các cơ hội cho doanh nghiệp xuất nhập khẩu.</p>
+        <a href="#" class="news-link">Đọc thêm →</a>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-image">📋</div>
+      <div class="news-content">
+        <div class="news-date">05/04/2025</div>
+        <h3 class="news-title">Hướng dẫn đăng ký kiểm tra chất lượng hàng hóa</h3>
+        <p class="news-excerpt">Quy trình đăng ký và các giấy tờ cần thiết khi thực hiện kiểm tra chất lượng hàng nhập khẩu.</p>
+        <a href="#" class="news-link">Đọc thêm →</a>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-image">🛃</div>
+      <div class="news-content">
+        <div class="news-date">01/04/2025</div>
+        <h3 class="news-title">Lợi ích của việc thuê đơn vị làm thủ tục hải quan chuyên nghiệp</h3>
+        <p class="news-excerpt">Tại sao doanh nghiệp nên sử dụng dịch vụ hải quan chuyên nghiệp để tối ưu chi phí và thời gian.</p>
+        <a href="#" class="news-link">Đọc thêm →</a>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-image">🚛</div>
+      <div class="news-content">
+        <div class="news-date">25/03/2025</div>
+        <h3 class="news-title">Mạng lưới vận tải đường bộ kết nối các khu công nghiệp</h3>
+        <p class="news-excerpt">Giải pháp vận chuyển hàng hóa nội địa hiệu quả từ cảng biển đến các khu công nghiệp.</p>
+        <a href="#" class="news-link">Đọc thêm →</a>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-image">🔬</div>
+      <div class="news-content">
+        <div class="news-date">20/03/2025</div>
+        <h3 class="news-title">Quy trình kiểm tra chuyên ngành cho hàng hóa nhập khẩu</h3>
+        <p class="news-excerpt">Chi tiết các bước thực hiện kiểm tra chuyên ngành và các lưu ý quan trọng.</p>
+        <a href="#" class="news-link">Đọc thêm →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Công Ty AV Logistics</h4>
+      <p>Công Ty TNHH Thương Mại Và Giao Nhận AV</p>
+      <p>MST: 0202116800</p>
+      <p>Địa chỉ: 1/115 Phương Lưu, Phường Ngô Quyền, TP. Hải Phòng</p>
+    </div>
+    <div class="footer-col">
+      <h4>Dịch Vụ</h4>
+      <a href="gioithieu.html#services">Thủ Tục Hải Quan</a>
+      <a href="gioithieu.html#services">Vận Tải Đường Bộ</a>
+      <a href="gioithieu.html#services">Vận Tải Đường Biển</a>
+      <a href="gioithieu.html#services">Đăng Ký KTCL</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Kết</h4>
+      <a href="index.html">Trang Chủ</a>
+      <a href="gioithieu.html">Giới Thiệu</a>
+      <a href="lienhebaogia.html">Liên Hệ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Hệ</h4>
+      <p>Hotline: 0906 174 066</p>
+      <p>Email: sales@hplink.com.vn</p>
+      <p>Hải Phòng, Việt Nam</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Công Ty TNHH Thương Mại Và Giao Nhận AV · MST 0202116800
+  </div>
+</footer>
+
+</body>
+</html>

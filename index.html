@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AV Logistics – Giao Nhận Quốc Tế Hải Phòng</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --primary-dark: #0f2744;
+    --accent: #e63946;
+    --accent-hover: #c92a37;
+    --gray: #6b7280;
+    --light: #f9fafb;
+    --white: #ffffff;
+    --border: #e5e7eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--white);
+    color: var(--primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .top-bar-info a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .top-bar-info a:hover {
+    color: var(--accent);
+  }
+
+  .top-bar-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .top-bar-social a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .top-bar-social a:hover {
+    color: var(--accent);
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-logo-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--white);
+  }
+
+  .nav-logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--primary);
+  }
+
+  .nav-logo-text span {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-links > .nav-item > a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .nav-links > .nav-item > a:hover {
+    color: var(--accent);
+  }
+
+  .nav-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+
+  .nav-item:hover .nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s;
+    z-index: 1000;
+  }
+
+  .nav-item:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .dropdown a:hover {
+    background: var(--light);
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-hover);
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></svg>');
+    background-size: 100px 100px;
+    opacity: 0.5;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-hero {
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-hero-primary {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .btn-hero-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .btn-hero-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  .btn-hero-secondary:hover {
+    background: var(--white);
+    color: var(--primary);
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin: 0.5rem auto 0;
+  }
+
+  .section-header p {
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--white);
+  }
+
+  .service-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+  }
+
+  .service-card p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* WHY US */
+  .why-section {
+    background: var(--light);
+    padding: 5rem 2rem;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .why-content h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .why-content p {
+    color: var(--gray);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .why-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .why-stat {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .why-stat .num {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .why-stat .label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-top: 0.3rem;
+  }
+
+  /* PROCESS */
+  .process-section {
+    background: var(--white);
+    padding: 5rem 2rem;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .process-step {
+    text-align: center;
+  }
+
+  .step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+  }
+
+  .process-step h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+  }
+
+  .process-step p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--light);
+    padding: 5rem 2rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-info h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .contact-item-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-item-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--white);
+  }
+
+  .contact-item-text strong {
+    display: block;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-item-text {
+    color: var(--gray);
+    font-size: 0.95rem;
+  }
+
+  .contact-form {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .contact-form h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--primary);
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--white);
+    padding: 1rem;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-hover);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--primary-dark);
+    color: var(--white);
+    padding: 3rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+  }
+
+  .footer-col h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+  }
+
+  .footer-col p,
+  .footer-col a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .top-bar {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .nav-links {
+      display: none;
+    }
+    .why-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .hero h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-info">
+    <a href="tel:+84906174066">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      0906 174 066
+    </a>
+    <a href="mailto:sales@hplink.com.vn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      sales@hplink.com.vn
+    </a>
+  </div>
+  <div class="top-bar-social">
+    <a href="#">Facebook</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="nav-logo-text">AV <span>Logistics</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
+      <li class="nav-item"><a href="about.html">Về Chúng Tôi</a></li>
+      <li class="nav-item">
+        <a href="gioithieu.html">Giới Thiệu <span class="nav-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="gioithieu.html#services">Dịch Vụ</a>
+          <a href="gioithieu.html#tuyendung">Tuyển Dụng</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#">Góc Tư Vấn <span class="nav-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="#">Văn Bản Pháp Quy</a>
+          <a href="#">Kiểm Tra Chuyên Ngành</a>
+          <a href="#">Thủ Tục Hải Quan</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="tintuc.html">Tin Tức</a></li>
+      <li class="nav-item"><a href="lienhebaogia.html" class="nav-cta">Liên Hệ Báo Giá</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Giải Pháp Logistics<br><span>Toàn Diện</span> & Tin Cậy</h1>
+    <p>Công Ty TNHH Thương Mại Và Giao Nhận AV cung cấp dịch vụ thủ tục hải quan, vận tải đường bộ, đường biển và kiểm tra chất lượng hàng hóa tại Hải Phòng và toàn quốc.</p>
+    <div class="hero-buttons">
+      <a href="#services" class="btn-hero btn-hero-primary">Khám Phá Dịch Vụ</a>
+      <a href="#contact" class="btn-hero btn-hero-secondary">Liên Hệ Ngay</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <h2>Dịch Vụ Của Chúng Tôi</h2>
+    <p>Chúng tôi cung cấp đầy đủ các dịch vụ logistics từ thông quan đến vận chuyển, đảm bảo hàng hóa của bạn đến đích an toàn và đúng hẹn.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <h3>Thủ Tục Hải Quan</h3>
+      <p>Khai báo và làm thủ tục hải quan xuất nhập khẩu chính xác, nhanh chóng. Đội ngũ chuyên viên giàu kinh nghiệm, am hiểu luật hải quan hiện hành.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      </div>
+      <h3>Vận Tải Đường Bộ</h3>
+      <p>Vận chuyển hàng hóa nội địa bằng xe container, xe tải các loại. Kết nối các cảng biển Hải Phòng với khu công nghiệp, nhà máy toàn quốc.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2c-5.53 0-10 4.47-10 10s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59V15.5h-3.5V13h7c0 1.65-1.35 3-3.5 3zm-9.5 0c-2.15 0-3.5-1.35-3.5-3h7v2.5H7.5zm-3.5-5v-2h7v2H4zm16-2h-3.5V7H10v3.5H6.5v-5c0-.83.67-1.5 1.5-1.5h10.5c.83 0 1.5.67 1.5 1.5v5z"/></svg>
+      </div>
+      <h3>Vận Tải Đường Biển</h3>
+      <p>Booking tàu, gom hàng lẻ (LCL) và nguyên container (FCL) đi các tuyến quốc tế. Đối tác với nhiều hãng tàu lớn như Maersk, CMA, COSCO.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      </div>
+      <h3>Đăng Ký KTCL</h3>
+      <p>Đăng ký kiểm tra chất lượng hàng hóa nhập khẩu theo quy định của các bộ ban ngành. Tư vấn và xử lý hồ sơ kiểm định, hun trùng, kiểm dịch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="about">
+  <div class="why-grid">
+    <div class="why-content">
+      <h2>Về Chúng Tôi</h2>
+      <p>Chúng tôi là công ty logistics uy tín tại Hải Phòng, chuyên cung cấp dịch vụ giao nhận quốc tế, thủ tục hải quan và vận tải đa phương thức.</p>
+      <p>Với đội ngũ chuyên viên giàu kinh nghiệm và mạng lưới đối tác rộng khắp, chúng tôi cam kết mang lại giải pháp tối ưu, tiết kiệm chi phí và đảm bảo an toàn tuyệt đối cho hàng hóa của bạn.</p>
+      <div class="why-stats">
+        <div class="why-stat">
+          <div class="num">10+</div>
+          <div class="label">Năm Kinh Nghiệm</div>
+        </div>
+        <div class="why-stat">
+          <div class="num">500+</div>
+          <div class="label">Khách Hàng</div>
+        </div>
+        <div class="why-stat">
+          <div class="num">24/7</div>
+          <div class="label">Hỗ Trợ</div>
+        </div>
+        <div class="why-stat">
+          <div class="num">100%</div>
+          <div class="label">Đúng Tiến Độ</div>
+        </div>
+      </div>
+    </div>
+    <div class="why-content">
+      <h2>Tại Sao Chọn AV?</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--accent);">✓</span>
+          Đội ngũ chuyên viên hải quan giàu kinh nghiệm, am hiểu luật
+        </li>
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--accent);">✓</span>
+          Mạng lưới xe tải và đối tác vận tải rộng khắp miền Bắc
+        </li>
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--accent);">✓</span>
+          Quan hệ hợp tác với các hãng tàu quốc tế lớn
+        </li>
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--accent);">✓</span>
+          Tư vấn miễn phí, báo giá nhanh trong vòng 2 giờ
+        </li>
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--accent);">✓</span>
+          Hỗ trợ theo dõi lô hàng trực tuyến theo thời gian thực
+        </li>
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; color: var(--accent);">✓</span>
+          Cam kết không phát sinh chi phí ẩn
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="section-header">
+    <h2>Quy Trình Làm Việc</h2>
+    <p>Đơn giản - Minh bạch - Hiệu quả</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-number">1</div>
+      <h4>Tiếp Nhận Yêu Cầu</h4>
+      <p>Khách hàng liên hệ, cung cấp thông tin lô hàng. Chúng tôi tư vấn giải pháp phù hợp và báo giá nhanh.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">2</div>
+      <h4>Chuẩn Bị Hồ Sơ</h4>
+      <p>Hỗ trợ thu thập và kiểm tra bộ chứng từ, đảm bảo đầy đủ và chính xác theo yêu cầu hải quan.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">3</div>
+      <h4>Thông Quan & Vận Chuyển</h4>
+      <p>Thực hiện khai báo hải quan, thông quan và sắp xếp phương tiện vận chuyển đến điểm giao hàng.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">4</div>
+      <h4>Giao Hàng & Hoàn Thiện</h4>
+      <p>Bàn giao hàng hóa tận nơi, hoàn chỉnh hồ sơ và thanh lý hợp đồng. Hỗ trợ hậu mãi khi cần.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-header">
+    <h2>Liên Hệ Với Chúng Tôi</h2>
+    <p>Đội ngũ của chúng tôi sẵn sàng tư vấn và hỗ trợ bạn 24/7</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Thông Tin Liên Hệ</h3>
+      
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Trụ sở chính</strong>
+          1/115 Phương Lưu, Phường Ngô Quyền<br>
+          Thành Phố Hải Phòng
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Văn phòng đại diện</strong>
+          Phòng 600, Toà Nhà Lê Phạm, 508 Lê Thánh Tông<br>
+          Phường Ngô Quyền, Thành Phố Hải Phòng
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Điện thoại</strong>
+          <a href="tel:+84906174066" style="color: var(--accent); font-weight: 600;">0906 174 066</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </div>
+        <div class="contact-item-text">
+          <strong>Mã số thuế</strong>
+          0202116800
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Gửi Yêu Cầu Báo Giá</h3>
+      <form onsubmit="alert('Cảm ơn! Chúng tôi sẽ liên hệ lại trong vòng 2 giờ.'); return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Họ và Tên *</label>
+            <input type="text" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label>Số Điện Thoại *</label>
+            <input type="tel" placeholder="0912 345 678" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@company.com">
+        </div>
+        <div class="form-group">
+          <label>Dịch Vụ Cần Tư Vấn *</label>
+          <select required>
+            <option value="">-- Chọn dịch vụ --</option>
+            <option>Thủ Tục Hải Quan</option>
+            <option>Vận Tải Đường Bộ</option>
+            <option>Vận Tải Đường Biển</option>
+            <option>Đăng Ký KTCL</option>
+            <option>Nhiều Dịch Vụ</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nội Dung / Mô Tả Lô Hàng</label>
+          <textarea placeholder="Mô tả hàng hóa, xuất xứ, khối lượng, điểm đến..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">GỬI YÊU CẦU NGAY</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Công Ty AV Logistics</h4>
+      <p>Công Ty TNHH Thương Mại Và Giao Nhận AV</p>
+      <p>MST: 0202116800</p>
+      <p>Địa chỉ: 1/115 Phương Lưu, Phường Ngô Quyền, TP. Hải Phòng</p>
+    </div>
+    <div class="footer-col">
+      <h4>Dịch Vụ</h4>
+      <a href="#services">Thủ Tục Hải Quan</a>
+      <a href="#services">Vận Tải Đường Bộ</a>
+      <a href="#services">Vận Tải Đường Biển</a>
+      <a href="#services">Đăng Ký KTCL</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Kết</h4>
+      <a href="#about">Về Chúng Tôi</a>
+      <a href="#process">Quy Trình</a>
+      <a href="#contact">Liên Hệ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Hệ</h4>
+      <p>Hotline: 0906 174 066</p>
+      <p>Email: sales@hplink.com.vn</p>
+      <p>Hải Phòng, Việt Nam</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Công Ty TNHH Thương Mại Và Giao Nhận AV · MST 0202116800
+  </div>
+</footer>
+
+</body>
+</html>
