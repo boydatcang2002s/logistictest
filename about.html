@@ -213,6 +213,87 @@
     background: var(--accent-hover);
   }
 
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--primary);
+    margin: 5px 0;
+    transition: all 0.3s;
+  }
+
+  /* Mobile Navigation */
+  .nav-links.mobile-active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--white);
+    padding: 7rem 2rem 2rem;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    gap: 0;
+    z-index: 1000;
+  }
+
+  .nav-links.mobile-active .nav-item {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links.mobile-active .nav-item > a {
+    padding: 1rem 0;
+    width: 100%;
+  }
+
+  .nav-links.mobile-active .dropdown {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    padding-left: 1.5rem;
+    display: none;
+    background: var(--light);
+  }
+
+  .nav-links.mobile-active .nav-item.dropdown-active .dropdown {
+    display: block;
+  }
+
+  .nav-links.mobile-active .nav-cta {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* Overlay */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+
+  .mobile-overlay.active {
+    display: block;
+  }
+
   /* PAGE HEADER */
   .page-header {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -436,6 +517,7 @@
       gap: 0.5rem;
       text-align: center;
     }
+    .mobile-menu-btn { display: block; }
     .nav-links {
       display: none;
     }
@@ -447,6 +529,21 @@
     }
   }
 </style>
+<script>
+  function toggleMobileMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const overlay = document.querySelector('.mobile-overlay');
+    navLinks.classList.toggle('mobile-active');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = navLinks.classList.contains('mobile-active') ? 'hidden' : '';
+  }
+
+  function toggleDropdown(element) {
+    if (window.innerWidth <= 768) {
+      element.classList.toggle('dropdown-active');
+    }
+  }
+</script>
 </head>
 <body>
 
@@ -477,17 +574,22 @@
       </div>
       <div class="nav-logo-text">AV <span>Logistics</span></div>
     </a>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <ul class="nav-links">
       <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
       <li class="nav-item"><a href="about.html">Về Chúng Tôi</a></li>
-      <li class="nav-item">
+      <li class="nav-item" onclick="toggleDropdown(this)">
         <a href="gioithieu.html">Giới Thiệu <span class="nav-arrow">▼</span></a>
         <div class="dropdown">
           <a href="gioithieu.html#services">Dịch Vụ</a>
           <a href="gioithieu.html#tuyendung">Tuyển Dụng</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" onclick="toggleDropdown(this)">
         <a href="#">Góc Tư Vấn <span class="nav-arrow">▼</span></a>
         <div class="dropdown">
           <a href="#">Văn Bản Pháp Quy</a>
@@ -499,6 +601,7 @@
       <li class="nav-item"><a href="lienhebaogia.html" class="nav-cta">Liên Hệ Báo Giá</a></li>
     </ul>
   </div>
+  <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 </nav>
 
 <!-- PAGE HEADER -->
